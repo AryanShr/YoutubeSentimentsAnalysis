@@ -20,7 +20,7 @@ function SearchBar(props) {
       id: getVideoId(e.target[0].value)
     }).then((res) => {
       props.loader(false);
-      navigate("/dashboard", { state: JSON.parse(res.data) });
+      navigate("/dashboard", { state: {"id":getVideoId(e.target[0].value),"comment":JSON.parse(res.data)} });
     }
     );
   };

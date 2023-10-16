@@ -20,17 +20,20 @@ def api():
     # df = df.drop(columns=['AuthorName', 'Comments'])
     return jsonify(df.to_json(orient='records'))
 
-@app.route('/getVideoData', methods=['POST'])
+@app.route('/getVideoData', methods=['GET'])
 def getVideoData():
-    data = request.get_json()
-    response = get_video_data(data['id'])
+    data = request.args.get('id')
+    print(data)
+    response = get_video_data(data)
+    
     # get channel name, video title, video description, video thumbnail, video publish date
     channelName = response["items"][0]["snippet"]["channelTitle"]
     videoTitle = response["items"][0]["snippet"]["title"]
-    videoDescription = response["items"][0]["snippet"]["description"]
-    videoThumbnail = response["items"][0]["snippet"]["thumbnails"]["high"]["url"]
+    # videoThumbnail = response["items"][0]["snippet"]["thumbnails"]["high"]["url"]
     videoPublishDate = response["items"][0]["snippet"]["publishedAt"]
-    return jsonify({"channelName": channelName, "videoTitle": videoTitle, "videoDescription": videoDescription, "videoThumbnail": videoThumbnail, "videoPublishDate": videoPublishDate})
+    # return jsonify({"message":videoPublishDate})
+    # return jsonify({"channelName": channelName, "videoTitle": videoTitle, "videoDescription": videoDescription, "videoThumbnail": videoThumbnail, "videoPublishDate": videoPublishDate})
+    return jsonify({"channelName": channelName, "videoTitle": videoTitle, "videoPublishDate": videoPublishDate})
 
 if __name__ == '__main__':
     app.run(debug=True)

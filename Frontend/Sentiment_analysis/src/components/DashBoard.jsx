@@ -9,6 +9,7 @@ import LineChart from './LineChart';
 import WordCloudChart from './WordCloud';
 import InfoCards from './InfoCard';
 import TableCustomized from './Table';
+import axios from 'axios';
 
 Chart.register(CategoryScale);
 
@@ -16,12 +17,25 @@ function DashBoard() {
   const location = useLocation();
   const [data, setData] = useState([]);
   const [Sentiment, setSentiment] = useState({});
+  const [videoData, setVideoData] = useState({});
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/getVideoData', {
+    params: {
+      id: location.state.id
+    }
+  }).then((res) => {
+    console.log(res.data);
+    setVideoData(res.data);
+  })
+  // console.log(location.state.id);
+  }, []);
 
   const getCat = () => {
     const newData = [];
     const newSentiment = { ...Sentiment };
 
-    Object.values(location.state).forEach((item) => {
+    Object.values(location.state.comment).forEach((item) => {
       const commentData = {
         author: item.AuthorName,
         Comment: item.Comments,
@@ -75,9 +89,9 @@ function DashBoard() {
   return (
     <div>
       <div className='flex justify-center'>
-        <InfoCards />
-        <InfoCards />
-        <InfoCards />
+        <InfoCards title={videoData.videoTitle }/>
+        <InfoCards title={videoData.channelName }/>
+        <InfoCards title={videoData.videoPublishDate}/>
 
       </div>
       <div className='flex flex-row w-full justify-around'>
