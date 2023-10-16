@@ -44,8 +44,8 @@ if __name__ == "__main__":
   id = "FAjfVcl2L74" 
   df = get_sentiment(id)
 
-  sentiment_analysis, average_time_difference, number_of_comments = get_df_analysis(df)
-  print(sentiment_analysis)
-  print(average_time_difference)
-  print(number_of_comments)
+  # sentiment_analysis, average_time_difference, number_of_comments = get_df_analysis(df)
+  # print(sentiment_analysis)
+  # print(average_time_difference)
+  # print(number_of_comments)
   print(df)

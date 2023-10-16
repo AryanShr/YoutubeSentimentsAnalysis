@@ -18,7 +18,7 @@ def api():
     df = get_sentiment(data["id"])
     # drop AuthorName and Comments columns
     # df = df.drop(columns=['AuthorName', 'Comments'])
-    return jsonify(df.to_dict())
+    return jsonify(df.to_json(orient='records'))
 
 @app.route('/getVideoData', methods=['POST'])
 def getVideoData():

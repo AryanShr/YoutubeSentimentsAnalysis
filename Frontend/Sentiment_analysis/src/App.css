@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+body{
+  background-color: #0a0a18;
+}
+@keyframes gradient-wave {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  .bg-scroll {
+    background-size: 200% 200%;
+    animation: gradient-wave 5s ease infinite;
+  }

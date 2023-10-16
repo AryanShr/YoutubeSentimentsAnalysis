@@ -19,7 +19,7 @@ def google_api(id, max_results=None):
     while True:
         request = youtube.commentThreads().list(
             part="id,snippet",
-            maxResults=100 if max_results is None else min(max_results - len(comments), 100),
+            # maxResults=100 if max_results is None else min(max_results - len(comments), 100),
             order="relevance",
             videoId=id,
             pageToken=next_page_token
@@ -30,7 +30,7 @@ def google_api(id, max_results=None):
         next_page_token = response.get("nextPageToken")
         if not next_page_token or (max_results is not None and len(comments) >= max_results):
             break
-
+    print(len(comments))
     return comments
 
 def get_video_data(id):
